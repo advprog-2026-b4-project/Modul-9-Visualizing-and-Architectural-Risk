@@ -30,14 +30,14 @@
 ### Context Diagram (Future)
 
 <!-- TODO: Replace with future context diagram after risk storming -->
-![Future Context Diagram](./G2_Context_Diagram.png)
+![Future Context Diagram](./Future_Context_Diagram.png)
 
 ---
 
 ### Container Diagram (Future)
 
 <!-- TODO: Replace with future container diagram after risk storming -->
-![Future Container Diagram](./G2_Container_Diagram.png)
+![Future Container Diagram](./Future_Container_Diagram.png)
 
 ---
 
