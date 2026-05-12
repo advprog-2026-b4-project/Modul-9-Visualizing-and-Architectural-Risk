@@ -98,15 +98,62 @@ Selain itu, kami mengusulkan penambahan Logistics Optimization Engine sebagai la
 
 ### Kadek Ngurah Septyawan Chandra Diputra (2406420772) — Manajemen Pengiriman Hasil Panen Sawit
 
-**Focus:** Delivery assignments, capacity constraints (400kg), state transitions, and multi-tier approval workflows.
+**Focus:** Delivery assignment, 400kg truck capacity constraint, Supir delivery state transitions, Mandor/Admin approval workflows, and knapsack-based assignment recommendation.
 
-#### Component Diagram
+The Pengiriman diagrams expand the Backend API, Frontend Web Application, and PostgreSQL containers from the group container diagram. They show how the delivery module is implemented across the Next.js frontend, Spring Boot backend, persistence layer, and its dependencies on the Panen, Kebun, User, and Payroll-related modules.
 
-![Component Diagram - Manajemen Pengiriman](./component_pengiriman.png)
+Component-to-code diagram mapping:
+- Component Diagram A — Backend Pengiriman: related to Code Diagram 1, Code Diagram 2, and Code Diagram 3.
+- Component Diagram B — Frontend Pengiriman: related to Code Diagram 4.
+- Component Diagram C — Recommend Assignment Flow: related to Code Diagram 2 and Code Diagram 4.
 
-#### Code Diagram
+#### Component Diagrams
 
-![Code Diagram - Manajemen Pengiriman](./code_pengiriman.png)
+##### Backend Pengiriman Component Diagram
+
+![Component Diagram - Backend Pengiriman](./component_pengiriman_backend.png)
+
+This diagram expands the Spring Boot Backend API container into the internal Pengiriman components: REST controller, command/query use cases, DTOs, domain status/events, repository port, repository adapter, mapper, JPA repository, and persistence entities.
+
+##### Frontend Pengiriman Component Diagram
+
+![Component Diagram - Frontend Pengiriman](./component_pengiriman_frontend.png)
+
+This diagram expands the Next.js Frontend container into the pages, React Query hooks, API client, shared helpers, token storage, and UI components used by Mandor, Supir, and Admin users in the Pengiriman module.
+
+##### Recommend Assignment Component Diagram
+
+![Component Diagram - Recommend Assignment](./component_pengiriman_recommend_assignment.png)
+
+This additional component diagram focuses on the optional recommendation feature. It shows how the Mandor triggers the recommendation UI, how the frontend calls the backend endpoint, and how the backend combines Kebun, Panen, Pengiriman repository data, and knapsack logic to return the recommended panen assignment.
+
+#### Code Diagrams
+
+The code diagrams cover the main implementation concerns of the Pengiriman module: command workflow, query and recommendation logic, persistence mapping, and frontend integration. Together, they represent the code-level structures related to delivery assignment, delivery status updates, Mandor/Admin processing, and knapsack-based assignment recommendation.
+
+##### Backend Command Use Case Code Diagram
+
+![Code Diagram - Backend Command Pengiriman](./code_pengiriman_backend_command.png)
+
+This diagram describes the command-side implementation of Pengiriman: assigning panen to a Supir, enforcing ownership and weight constraints, updating delivery status, processing Mandor approval/rejection, processing Admin approval/partial/rejection, and publishing domain events.
+
+##### Backend Query and Knapsack Code Diagram
+
+![Code Diagram - Backend Query and Knapsack Pengiriman](./code_pengiriman_backend_query_knapsack.png)
+
+This diagram describes the query-side implementation, including assignable panen retrieval, Supir/delivery queries, user name enrichment, and the 0/1 knapsack recommendation logic for selecting the best panen combination under the 400kg capacity.
+
+##### Backend Persistence Code Diagram
+
+![Code Diagram - Backend Persistence Pengiriman](./code_pengiriman_backend_persistence.png)
+
+This diagram describes the persistence implementation through the repository port, repository adapter, JPA repository, MapStruct mapper, Pengiriman entity, Pengiriman panen item entity, DTO, and PostgreSQL database.
+
+##### Frontend Code Diagram
+
+![Code Diagram - Frontend Pengiriman](./code_pengiriman_frontend.png)
+
+This diagram describes the frontend implementation: Pengiriman pages, React Query hooks, typed API client, shared formatting helpers, token-based role checks, and DTO/request types used by the UI.
 
 ---
 
