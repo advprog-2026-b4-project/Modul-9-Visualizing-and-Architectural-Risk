@@ -1,10 +1,10 @@
-# Modul 9 — Visualizing and Architectural Risk
+# Modul 9 - Visualizing and Architectural Risk
 
 **Group:** B04 - MySawit
 
 ---
 
-## Deliverable G.1 — Current Architecture
+## Deliverable G.1 - Current Architecture
 
 ### Context Diagram (Current)
 
@@ -24,7 +24,7 @@
 
 ---
 
-## Deliverable G.2 — Future Architecture (Risk-Stormed)
+## Deliverable G.2 - Future Architecture (Risk-Stormed)
 
 
 ### Context Diagram (Future)
@@ -41,7 +41,7 @@
 
 ---
 
-## Deliverable G.3 — Risk Storming Justification
+## Deliverable G.3 - Risk Storming Justification
 
 
 <!-- TODO: Write 2-3 paragraphs explaining:
@@ -64,11 +64,11 @@ Selain itu, kami mengusulkan penambahan Logistics Optimization Engine sebagai la
 
 ---
 
-## Deliverable Individual — Component & Code Diagram
+## Deliverable Individual - Component & Code Diagram
 
 ---
 
-### Ammar Muhammad Rafif (2406495602) — Auth & User Management
+### Ammar Muhammad Rafif (2406495602) - Auth & User Management
 
 **Focus:** Google OAuth integration, role-based access control (RBAC), and admin user operations.
 
@@ -82,7 +82,7 @@ Selain itu, kami mengusulkan penambahan Logistics Optimization Engine sebagai la
 
 ---
 
-### Davin Fauzan Akmalianto (2406409504) — Manajemen Hasil Panen Sawit
+### Davin Fauzan Akmalianto (2406409504) - Manajemen Hasil Panen Sawit
 
 **Focus:** Harvest recording, daily limits, Mandor approval workflows, and async triggers for payroll.
 
@@ -96,16 +96,16 @@ Selain itu, kami mengusulkan penambahan Logistics Optimization Engine sebagai la
 
 ---
 
-### Kadek Ngurah Septyawan Chandra Diputra (2406420772) — Manajemen Pengiriman Hasil Panen Sawit
+### Kadek Ngurah Septyawan Chandra Diputra (2406420772) - Manajemen Pengiriman Hasil Panen Sawit
 
 **Focus:** Delivery assignment, 400kg truck capacity constraint, Supir delivery state transitions, Mandor/Admin approval workflows, and knapsack-based assignment recommendation.
 
 The Pengiriman diagrams expand the Backend API, Frontend Web Application, and PostgreSQL containers from the group container diagram. They show how the delivery module is implemented across the Next.js frontend, Spring Boot backend, persistence layer, and its dependencies on the Panen, Kebun, User, and Payroll-related modules.
 
 Component-to-code diagram mapping:
-- Component Diagram A — Backend Pengiriman: related to Code Diagram 1, Code Diagram 2, and Code Diagram 3.
-- Component Diagram B — Frontend Pengiriman: related to Code Diagram 4.
-- Component Diagram C — Recommend Assignment Flow: related to Code Diagram 2 and Code Diagram 4.
+- Component Diagram A - Backend Pengiriman: related to Code Diagram 1, Code Diagram 2, and Code Diagram 3.
+- Component Diagram B - Frontend Pengiriman: related to Code Diagram 4.
+- Component Diagram C - Recommend Assignment Flow: related to Code Diagram 2 and Code Diagram 4.
 
 #### Component Diagrams
 
@@ -157,7 +157,7 @@ This diagram describes the frontend implementation: Pengiriman pages, React Quer
 
 ---
 
-### Vincent Valentino Oei (2406353225) — Manajemen Pembayaran
+### Vincent Valentino Oei (2406353225) - Manajemen Pembayaran
 
 **Focus:** Wage configuration, payroll entity management, balance calculations, and payment gateway integration.
 
@@ -165,13 +165,27 @@ This diagram describes the frontend implementation: Pengiriman pages, React Quer
 
 ![Component Diagram - Manajemen Pembayaran](./component_pembayaran.png)
 
-#### Code Diagram
+#### Code Diagrams
 
-![Code Diagram - Manajemen Pembayaran](./code_pembayaran.png)
+##### Use Case Interfaces & Service Implementations
+
+![Code Diagram 1 - Pembayaran](./code_pembayaran_use_case_service.png)
+
+##### Persistence Layer (Ports, Adapters, JPA, Entities)
+
+![Code Diagram 2 - Pembayaran](./code_pembayaran_persistence.png)
+
+##### REST API Layer
+
+![Code Diagram 3 - Pembayaran](./code_pembayaran_rest_api.png)
+
+##### Event Driven Payroll Flow
+
+![Code Diagram 4 - Pembayaran](./code_pembayaran_event_driven_payroll.png)
 
 ---
 
-### Yafi Alifuddin (2406437155) — Manajemen Kebun Sawit
+### Yafi Alifuddin (2406437155) - Manajemen Kebun Sawit
 
 **Focus:** Plantation CRUD operations, spatial coordinate validation, and 1-to-1 Mandor assignments.
 
