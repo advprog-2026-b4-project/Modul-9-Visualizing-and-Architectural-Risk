@@ -49,9 +49,18 @@
   2. How the Risk Storming technique was applied
   3. Why the architectural modifications in G.2 mitigate those risks -->
 
-_Placeholder — to be filled after risk storming session._
+### Risk Analysis and Architecture Modification Justification
 
----
+Dengan menerapkan teknik Risk Storming dan membayangkan MySawit sebagai sistem enterprise yang sangat sukses dalam menangani ribuan panen dan pengiriman harian, beberapa risiko arsitektural yang kritis telah teridentifikasi. Risiko yang paling menonjol terletak pada penanganan event sinkron (synchronous event handling) saat ini (menggunakan @EventListener internal dari Spring). Saat ini, ketika seorang Mandor menyetujui panen (PanenApprovedEvent), sistem secara sinkron menghitung dan membuat payroll ledgers serta mencoba mengirimkan notifikasi. Pada skala yang masif, jika layanan notifikasi atau penghitungan pembayaran mengalami kendala (hang), seluruh transaksi database akan di-rollback, sehingga mencegah Mandor menyetujui panen tersebut.
+
+Lebih jauh lagi, ketiadaan algoritma optimasi Knapsack untuk modul Pengiriman (Delivery) menyebabkan truk dimuat secara tidak efisien, yang berujung pada kerugian finansial yang masif dalam skala besar. Terakhir, modul Notification saat ini berupa interface yang belum selesai, yang berarti lonjakan tiba-tiba dalam penggunaan sistem akan membuat pengguna tidak dapat melihat pembaruan-pembaruan yang krusial.
+
+### Architecture Modification Justification:
+Untuk memitigasi risiko-risiko ini, arsitektur masa depan akan memperkenalkan Message Broker (Kafka/RabbitMQ) untuk memisahkan (decouple) domain events. Ketika sebuah panen disetujui, sistem inti (core system) hanya akan menulis ke database dan mempublikasikan sebuah event ke broker, lalu segera mengembalikan respons sukses kepada pengguna. Worker independen (seperti Notification Worker dan Payroll Worker yang didedikasikan khusus) akan mengonsumsi events tersebut secara asinkron (asynchronously), memastikan bahwa kegagalan pada notifikasi tidak akan memblokir operasi perkebunan inti.
+
+Selain itu, kami mengusulkan penambahan Logistics Optimization Engine sebagai layanan atau modul khusus untuk mengimplementasikan algoritma Knapsack, yang secara otomatis merekomendasikan bundel panen 400kg yang paling optimal untuk para pengemudi, sehingga dapat memaksimalkan efisiensi armada dan mengurangi biaya operasional.
+
+
 
 ---
 
